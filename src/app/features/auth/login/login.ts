@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,10 @@ export class LoginComponent {
   email = '';
   password = '';
 
-  constructor(private authService: AuthService) {}
+  constructor(
+  private authService: AuthService,
+  private router: Router
+) {}
 
   login() {
   this.authService.login({
@@ -28,6 +32,8 @@ export class LoginComponent {
       this.authService.saveToken(token);
 
       alert('Login successful!');
+
+      this.router.navigate(['/tasks'])
     },
     error: (err: any) => {
       console.error(err);
@@ -35,4 +41,8 @@ export class LoginComponent {
     }
   });
 }
+
+  goToRegister() {
+    this.router.navigate(['/register']);
+  }
 }
