@@ -31,4 +31,8 @@ export class Register {
       error: () => alert('Registration failed')
     });
   }
+
+  goToLogin() {
+    this.router.navigate(['/login']);
+  }
 }
