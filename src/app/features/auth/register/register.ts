@@ -29,16 +29,15 @@ export class Register {
       password: this.password,
       roleId: 2
     }).subscribe({
-      next: () => {
-        alert('Registered successfully!');
+      next: (res) => {
+      console.log("SUCCESS", res);
+
+      this.isSubmitting = false;
+
+      setTimeout(() => {
         this.router.navigate(['/login']);
-      },
-      error: () => {
-        alert('Registration failed');
-      },
-      complete: () => {
-        this.isSubmitting = false;
-      }
+      }, 300);
+    }
     });
   }
 
