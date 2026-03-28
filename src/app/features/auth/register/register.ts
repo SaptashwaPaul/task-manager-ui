@@ -31,26 +31,16 @@ export class Register {
         password: this.password,
         roleId: 2
       }).subscribe({
-        next: (res) => {
-          console.log("SUCCESS", res);
-
+        next: () => {
           this.isSubmitting = false;
 
-          // 🔥 ALWAYS treat this as success
           alert('Registered successfully!');
           this.router.navigate(['/login']);
         },
         error: (err) => {
-          console.log("ERROR BLOCK TRIGGERED", err);
+          console.error(err);
 
           this.isSubmitting = false;
-
-          // 🔥 IGNORE false errors caused by preflight
-          if (err.status === 0 || err.status === 204) {
-            alert('Registered successfully!');
-            this.router.navigate(['/login']);
-            return;
-          }
 
           alert('Registration failed');
         }
