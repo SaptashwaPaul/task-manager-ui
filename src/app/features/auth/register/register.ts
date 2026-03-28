@@ -19,27 +19,35 @@ export class Register {
 
   isSubmitting = false;
 
-  register() {
-    if (this.isSubmitting) return; // 🔥 prevent duplicate
-    this.isSubmitting = true;
 
-    this.authService.register({
-      name: this.name,
-      email: this.email,
-      password: this.password,
-      roleId: 2
-    }).subscribe({
-      next: (res) => {
-      console.log("SUCCESS", res);
+    register() {
+      if (this.isSubmitting) return;
 
-      this.isSubmitting = false;
+      this.isSubmitting = true;
 
-      setTimeout(() => {
-        this.router.navigate(['/login']);
-      }, 300);
+      this.authService.register({
+        name: this.name,
+        email: this.email,
+        password: this.password,
+        roleId: 2
+      }).subscribe({
+        next: (res) => {
+          console.log("SUCCESS", res);
+
+          this.isSubmitting = false; // 🔥 FIX
+
+          alert('Registered successfully!');
+          this.router.navigate(['/login']); // 🔥 redirect
+        },
+        error: (err) => {
+          console.error(err);
+
+          this.isSubmitting = false; // 🔥 FIX
+
+          alert('Registration failed');
+        }
+      });
     }
-    });
-  }
 
   goToLogin() {
     this.router.navigate(['/login']);
