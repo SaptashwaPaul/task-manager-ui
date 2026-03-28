@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class TaskService {
 
-  private baseUrl = 'http://localhost:5091/api/tasks';
+  private baseUrl = 'https://taskmanager-nhd4.onrender.com/api/tasks';
 
   constructor(private http: HttpClient) {}
 
@@ -39,18 +39,18 @@ export class TaskService {
 
   generateTask(input: string) {
     return this.http.post<string>(
-      'http://localhost:5091/api/ai/generate-task',
+      'https://taskmanager-nhd4.onrender.com/api/ai/generate-task',
       { input } // 🔥 THIS IS THE FIX
     );
   }
 
   generatePlan() {
-    return this.http.get<any>('http://localhost:5091/api/ai/plan');
+    return this.http.get<any>('https://taskmanager-nhd4.onrender.com/api/ai/plan');
   }
 
   chat(message: string) {
     return this.http.post<any>(
-      'http://localhost:5091/api/ai/chat',
+      'https://taskmanager-nhd4.onrender.com/api/ai/chat',
       { message } // ✅ clean JSON
     );
   }
