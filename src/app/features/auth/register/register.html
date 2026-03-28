@@ -17,8 +17,12 @@
       <input [(ngModel)]="password" type="password" placeholder="Password" />
     </div>
 
-    <button class="btn-primary" type="button" (click)="register()">
-      Register
+    <button 
+        class="btn-primary" 
+        type="button" 
+        [disabled]="isSubmitting"
+        (click)="register()">
+        {{ isSubmitting ? 'Registering...' : 'Register' }}
     </button>
 
     <p class="auth-footer">
