@@ -1,0 +1,22 @@
+<nav style="background:#1e293b; color:white; padding:15px;">
+  <span style="font-weight:bold;">TaskManager</span>
+
+  <span style="float:right;">
+    <a routerLink="/tasks" style="color:white; margin-right:15px;">Tasks</a>
+
+    <!-- 🔐 Show Login if NOT logged in -->
+    <a *ngIf="!isLoggedIn()" routerLink="/login" style="color:white; margin-right:15px;">
+      Login
+    </a>
+
+    <!-- 🚪 Show Logout if logged in -->
+    <button *ngIf="isLoggedIn()" (click)="logout()" 
+      style="background:none; border:none; color:white; cursor:pointer;">
+      Logout
+    </button>
+  </span>
+</nav>
+
+<div style="padding:20px;">
+  <router-outlet></router-outlet>
+</div>

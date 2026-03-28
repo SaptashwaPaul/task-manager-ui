@@ -1,0 +1,176 @@
+<div style="max-width:1000px; margin:auto; padding:20px;">
+
+  <h2 class="title">Tasks</h2>
+
+  <!-- 🔍 FILTER + SEARCH -->
+  <div class="filter-bar">
+    <input [(ngModel)]="search" placeholder="Search tasks..." />
+
+    <select [(ngModel)]="selectedStatus">
+      <option [ngValue]="undefined">All</option>
+      <option [ngValue]="1">Open</option>
+      <option [ngValue]="2">In Progress</option>
+      <option [ngValue]="3">Blocked</option>
+      <option [ngValue]="4">Done</option>
+    </select>
+
+    <button class="btn-primary" (click)="loadTasks()">Apply</button>
+  </div>
+
+  <!-- 🤖 AI + CREATE SECTION -->
+  <div class="filter-bar">
+
+    <button class="create-btn" (click)="toggleForm()">
+      + Create Task
+    </button>
+
+    <input [(ngModel)]="aiInput" placeholder="Describe your task..." />
+
+    <button class="btn-ai" (click)="generateWithAI()">✨ Generate</button>
+
+    <button class="btn-ai" (click)="generatePlan()" [disabled]="isPlanning">
+      {{ isPlanning ? 'Planning...' : '🧠 Plan My Day' }}
+    </button>
+
+  </div>
+
+  <!-- 📝 CREATE TASK FORM -->
+  <div *ngIf="showForm" class="form">
+
+    <input [(ngModel)]="newTask.title" placeholder="Title" />
+
+    <input [(ngModel)]="newTask.description" placeholder="Description" />
+
+    <input [(ngModel)]="newTask.dueDate" type="date" />
+
+    <select [(ngModel)]="newTask.priority">
+      <option value="Low">Low</option>
+      <option value="Medium">Medium</option>
+      <option value="High">High</option>
+    </select>
+
+    <button (click)="createTask()">Save</button>
+
+  </div>
+
+  <!-- 📋 TASK LIST -->
+  <p *ngIf="isLoadingTasks">Loading tasks...</p>
+  <div class="task-container">
+
+    <div class="task-card" *ngFor="let task of (tasks$ | async)">
+      
+      <h3>{{ task.title || 'Untitled Task' }}</h3>
+      
+      <p class="description">
+        {{ task.description || 'No description' }}
+      </p>
+
+      <div class="meta">
+        <span class="status" 
+              [ngClass]="task.status.toLowerCase().replace(' ', '-')">
+          {{ task.status }}
+        </span>
+        <span class="priority" 
+              [ngClass]="task.priority.toLowerCase()">
+          {{ task.priority }}
+        </span>
+      </div>
+
+      <!-- 🔄 STATUS UPDATE -->
+      <div class="status-update">
+        <select [(ngModel)]="task.statusId" (change)="updateStatus(task.id, task.statusId)">
+          <option [ngValue]="1">Open</option>
+          <option [ngValue]="2">In Progress</option>
+          <option [ngValue]="3">Blocked</option>
+          <option [ngValue]="4">Done</option>
+        </select>
+      </div>
+
+      <!-- 📅 DATE -->
+      <div class="dates">
+        <small>Due: {{ task.dueDate | date:'mediumDate' }}</small>
+      </div>
+
+      <!-- 🧹 ACTIONS -->
+      <div class="actions">
+        <button class="delete-btn" (click)="deleteTask(task.id)">
+          Delete
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- 📄 PAGINATION -->
+  <div class="pagination">
+    <button 
+      (click)="page = page - 1; loadTasks()" 
+      [disabled]="page === 1">
+      Prev
+    </button>
+
+    <span>Page {{ page }}</span>
+
+    <button 
+      (click)="page = page + 1; loadTasks()">
+      Next
+    </button>
+  </div>
+
+  <!-- ❌ EMPTY STATE -->
+  <p *ngIf="(tasks$ | async)?.length === 0" class="empty">
+    🚀 No tasks yet. Create your first task!
+  </p>
+
+  <!-- ===================== -->
+  <!-- 🧠 AI PLAN MODAL -->
+  <!-- ===================== -->
+
+<div *ngIf="showPlanModal" class="modal-overlay" (click)="closePlanModal()">
+
+  <div class="modal" (click)="$event.stopPropagation()">
+
+      <button class="close-btn" (click)="closePlanModal()">✖</button>
+
+      <h2>📅 Your AI Plan</h2>
+
+      <div *ngFor="let item of plan" class="plan-item">
+        <div class="time">{{ item.time }}</div>
+        <div class="task">{{ item.task }}</div>
+        <div class="reason">{{ item.reason }}</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================== -->
+  <!-- 🤖 AI CHAT ASSISTANT -->
+  <!-- ===================== -->
+
+  <div class="chat-section">
+
+    <h3>🤖 AI Assistant</h3>
+
+    <div class="chat-box">
+
+      <div *ngFor="let msg of chatMessages">
+
+        <div [ngClass]="msg.role === 'user' ? 'user-msg' : 'ai-msg'">
+          <span>{{ msg.text }}</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="chat-input">
+      <input [(ngModel)]="chatInput" placeholder="Ask about your tasks..." />
+      <button (click)="sendMessage()">Send</button>
+    </div>
+
+    <p *ngIf="isChatLoading">Thinking...</p>
+
+  </div>
+
+</div>

@@ -1,0 +1,299 @@
+/* 🔥 PAGE */
+.title {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #1e293b;
+}
+
+/* 🔍 FILTER BAR */
+.filter-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+/* 🔤 INPUTS */
+input, select {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+/* 🔘 BUTTONS */
+button {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: #3b82f6;
+  color: white;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #2563eb;
+}
+
+/* ➕ CREATE BUTTON */
+.create-btn {
+  background: #10b981;
+}
+
+.create-btn:hover {
+  background: #059669;
+}
+
+/* 📦 TASK GRID */
+.task-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+/* 🧾 TASK CARD */
+.task-card {
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+  transition: 0.2s;
+}
+
+.task-card:hover {
+  transform: translateY(-3px);
+}
+
+/* 📝 DESCRIPTION */
+.description {
+  font-size: 14px;
+  color: #64748b;
+}
+
+/* 📊 META */
+.meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.status {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.priority {
+  font-size: 12px;
+  font-weight: 600;
+  color: #ef4444;
+}
+
+/* 📅 DATE */
+.dates {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+/* 🧹 ACTIONS */
+.actions {
+  margin-top: 10px;
+}
+
+.delete-btn {
+  background: #ef4444;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+}
+
+/* 📄 PAGINATION */
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* ❌ EMPTY */
+.empty {
+  margin-top: 20px;
+  color: #64748b;
+}
+
+/* 🧠 MODAL */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  width: 450px;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* ❌ CLOSE */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  color: black;
+  font-size: 18px;
+}
+
+/* 🧠 PLAN */
+.plan-item {
+  border-left: 4px solid #3b82f6;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: #f8fafc;
+  border-radius: 6px;
+}
+
+.time {
+  font-weight: 600;
+}
+
+.reason {
+  font-size: 12px;
+  color: #64748b;
+}
+
+/* 🤖 CHAT */
+.chat-section {
+  margin-top: 40px;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 20px;
+}
+
+.chat-box {
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+  background: #f9fafb;
+}
+
+.chat-input {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* 💬 MESSAGES */
+.user-msg {
+  text-align: right;
+  margin: 5px;
+}
+
+.user-msg span {
+  background: #3b82f6;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 10px;
+}
+
+.ai-msg {
+  text-align: left;
+  margin: 5px;
+}
+
+.ai-msg span {
+  background: #e5e7eb;
+  padding: 6px 10px;
+  border-radius: 10px;
+}
+
+.priority.low { color: #22c55e; }      /* green */
+.priority.medium { color: #f59e0b; }   /* yellow */
+.priority.high { color: #ef4444; } 
+
+.status {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.status.open { background: #e0f2fe; color: #0284c7; }
+.status.in-progress { background: #fef3c7; color: #b45309; }
+.status.blocked { background: #fee2e2; color: #b91c1c; }
+.status.done { background: #dcfce7; color: #166534; }
+
+.task-card h3 {
+  margin-bottom: 6px;
+}
+
+.description {
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.task-card h3 {
+  margin-bottom: 6px;
+}
+
+.description {
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.btn-primary { background: #3b82f6; }
+.btn-secondary { background: #64748b; }
+.btn-ai { background: #8b5cf6; }
+
+.actions {
+  opacity: 0;
+  transition: 0.2s;
+}
+
+.task-card:hover .actions {
+  opacity: 1;
+}
+
+nav a {
+  margin-left: 15px;
+  transition: 0.2s;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+.btn-primary {
+  background: #3b82f6;
+}
+
+.btn-ai {
+  background: #8b5cf6;
+}
+
+.btn-ai:hover {
+  background: #7c3aed;
+}
